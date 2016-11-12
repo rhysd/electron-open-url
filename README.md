@@ -1,5 +1,5 @@
-electron-open
-=============
+electron-open-url
+=================
 
 This is a package to open something with Electron window. You can use this from both command line and Node.js program.
 
@@ -8,7 +8,7 @@ This program continues to use the same window. So it does not open multiple tabs
 ## Install
 
 ```
-$ npm install -g electron-open electron
+$ npm install -g electron-open-url electron
 ```
 
 Note that this package registers 'electron' package as peer dependency. So you need to install it additinally. This is because make users to determine where the 'electron' package should be installed.
