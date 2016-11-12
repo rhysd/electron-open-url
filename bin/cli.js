@@ -29,8 +29,22 @@ function parseArgv(argv) {
 const parsed = parseArgv(process.argv.slice(2));
 if (parsed.help) {
     process.stderr.write(
-`
-$ electron-open {something} [--help|--with-fallback]
+`$ electron-open {something} [--help|--with-fallback]
+
+Description:
+    Open something in Electron window.
+
+Options:
+    {something}
+        Target to open. You can path URL (starts with 'http://' or 'https://'),
+        file path and so on.
+
+    --with-fallback
+        When 'electron' package is not found, fallback to system's open method.
+
+    --help
+        Show this help.
+
 `
     );
     process.exit(0);
