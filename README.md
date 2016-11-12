@@ -17,6 +17,8 @@ Note that this package registers 'electron' package as peer dependency. So you n
 
 ### From command line
 
+![screen shot](https://github.com/rhysd/ss/blob/master/electron-open-url/main.gif?raw=true)
+
 `electron-open` command is available.
 
 For example, below opens Twitter page with Electron window.
