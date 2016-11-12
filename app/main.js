@@ -45,6 +45,10 @@ function shouldFocus(argv) {
     return argv.indexOf('--without-focus') < 0;
 }
 
+function alwaysOnTop(argv) {
+    return argv.indexOf('--always-on-top') >= 0;
+}
+
 const shouldQuit = app.makeSingleInstance((argv, workdir) => {
     if (win !== null) {
         if (win.isMinimized(0)) {
@@ -60,6 +64,13 @@ const shouldQuit = app.makeSingleInstance((argv, workdir) => {
         if (shouldFocus(argv)) {
             win.focus();
         }
+
+        const fixOnTop = alwaysOnTop(argv);
+        if (fixOnTop && !win.isAlwaysOnTop()) {
+            win.setAlwaysOnTop(true);
+        } else if (!fixOnTop && win.isAlwaysOnTop()) {
+            win.setAlwaysOnTop(false);
+        }
     }
 });
 
@@ -74,6 +85,7 @@ app.once('ready', () => {
         width: size.width || 1000,
         height: size.height || 800,
         show: false,
+        alwaysOnTop: alwaysOnTop(process.argv),
         webPreferrences: {
             nodeIntegration: false,
             sandbox: true

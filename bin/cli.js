@@ -34,6 +34,11 @@ function parseArgv(argv) {
         argv.splice(without_focus_idx, 1);
     }
 
+    const always_on_top_idx = argv.indexOf('--always-on-top');
+    if (always_on_top_idx >= 0) {
+        argv.splice(always_on_top_idx, 1);
+    }
+
     const width = parseIntArg('width', argv);
     const height = parseIntArg('height', argv);
 
@@ -47,6 +52,7 @@ function parseArgv(argv) {
         target: argv[0],
         fallback: fallback_idx >= 0,
         focus: without_focus_idx < 0,
+        alwaysOnTop: always_on_top_idx >= 0,
         width,
         height,
     };
@@ -55,7 +61,7 @@ function parseArgv(argv) {
 const parsed = parseArgv(process.argv.slice(2));
 if (parsed.help) {
     process.stderr.write(
-`$ electron-open {something} [--help|--with-fallback|--width {px}|--height {px}|--without-focus]
+`$ electron-open {something} [Options]
 
 Description:
     Open something in Electron window.
@@ -76,6 +82,9 @@ Options:
 
     --without-focus
         Do not focus a window.
+
+    --always-on-top
+        Show a window always on top of desktop.
 
     --help
         Show this help.

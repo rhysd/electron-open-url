@@ -40,6 +40,9 @@ function open(parsed) {
     if (parsed.focus === false) {
         args.push('--without-focus');
     }
+    if (parsed.alwaysOnTop) {
+        args.push('--always-on-top');
+    }
 
     child_process.spawn(electron, args, {
         stdio: 'ignore',
