@@ -26,10 +26,19 @@ function open(parsed) {
         }
     }
 
-    child_process.spawn(electron, [
+    const args = [
         path.join(__dirname, 'app'),
         parsed.target
-    ], {
+    ];
+
+    if (parsed.width) {
+        args.push('--width', parsed.width);
+    }
+    if (parsed.height) {
+        args.push('--height', parsed.height);
+    }
+
+    child_process.spawn(electron, args, {
         stdio: 'ignore',
         detached: true
     }).unref();

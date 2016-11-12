@@ -2,6 +2,21 @@
 
 const openElectron = require('..');
 
+function parseIntArg(name, argv) {
+    const name_idx = argv.indexOf(`--${name}`);
+    if (name_idx == argv.length - 1 || name_idx < 0) {
+        return undefined;
+    }
+
+    const i = parseInt(argv[name_idx + 1], 10);
+    if (isNaN(i) || i === 0) {
+        return undefined;
+    }
+
+    argv.splice(name_idx, 2);
+    return i;
+}
+
 function parseArgv(argv) {
     if (argv.indexOf('--help') !== -1) {
         return {
@@ -14,6 +29,9 @@ function parseArgv(argv) {
         argv.splice(fallback_idx, 1);
     }
 
+    const width = parseIntArg('width', argv);
+    const height = parseIntArg('height', argv);
+
     if (argv.length === 0) {
         return {
             error: 'target to open was not found.'
@@ -22,14 +40,16 @@ function parseArgv(argv) {
 
     return {
         target: argv[0],
-        fallback: fallback_idx >= 0
+        fallback: fallback_idx >= 0,
+        width,
+        height,
     };
 }
 
 const parsed = parseArgv(process.argv.slice(2));
 if (parsed.help) {
     process.stderr.write(
-`$ electron-open {something} [--help|--with-fallback]
+`$ electron-open {something} [--help|--with-fallback|--width {px}|--height {px}]
 
 Description:
     Open something in Electron window.
@@ -41,6 +61,12 @@ Options:
 
     --with-fallback
         When 'electron' package is not found, fallback to system's open method.
+
+    --width {px}
+        Specify window width by pixel.
+
+    --height {px}
+        Specify window height by pixel.
 
     --help
         Show this help.
