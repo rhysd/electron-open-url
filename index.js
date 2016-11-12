@@ -37,6 +37,9 @@ function open(parsed) {
     if (parsed.height) {
         args.push('--height', parsed.height);
     }
+    if (parsed.focus === false) {
+        args.push('--without-focus');
+    }
 
     child_process.spawn(electron, args, {
         stdio: 'ignore',

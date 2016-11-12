@@ -41,17 +41,25 @@ function getWindowSize(argv) {
     return size;
 }
 
+function shouldFocus(argv) {
+    return argv.indexOf('--without-focus') < 0;
+}
+
 const shouldQuit = app.makeSingleInstance((argv, workdir) => {
     if (win !== null) {
         if (win.isMinimized(0)) {
             win.restore();
         }
+
         const size = getWindowSize(argv);
         if (size.width || size.height) {
             win.setSize(size.width, size.height);
         }
+
         win.loadURL(getUrlToOpen(argv));
-        win.focus();
+        if (shouldFocus(argv)) {
+            win.focus();
+        }
     }
 });
 
@@ -77,7 +85,11 @@ app.once('ready', () => {
     })
 
     win.once('ready-to-show', () => {
-        win.show();
+        if (shouldFocus(process.argv)) {
+            win.show();
+        } else {
+            win.showInactive();
+        }
     });
 
     win.loadURL(getUrlToOpen(process.argv));
