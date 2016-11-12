@@ -1,0 +1,35 @@
+{
+  "name": "electron-open",
+  "version": "0.0.0",
+  "description": "open something with Electron window",
+  "main": "index.js",
+  "bin": {
+    "electron-open": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhysd/electron-open.git"
+  },
+  "keywords": [
+    "electron",
+    "open",
+    "url",
+    "gui",
+    "window"
+  ],
+  "author": "rhysd <lin90162@yahoo.co.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhysd/electron-open/issues"
+  },
+  "homepage": "https://github.com/rhysd/electron-open#readme",
+  "dependencies": {
+    "open": "0.0.5"
+  },
+  "peerDependencies": {
+    "electron": "^1.4.6"
+  }
+}
