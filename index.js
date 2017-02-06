@@ -43,6 +43,9 @@ function open(parsed) {
     if (parsed.alwaysOnTop) {
         args.push('--always-on-top');
     }
+    if (parsed.fullscreen) {
+        args.push('--fullscreen');
+    }
 
     child_process.spawn(electron, args, {
         stdio: 'ignore',

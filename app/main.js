@@ -49,6 +49,10 @@ function alwaysOnTop(argv) {
     return argv.indexOf('--always-on-top') >= 0;
 }
 
+function shouldFullScreen(argv) {
+    return argv.indexOf('--fullscreen') >= 0;
+}
+
 const shouldQuit = app.makeSingleInstance((argv, workdir) => {
     if (win !== null) {
         if (win.isMinimized(0)) {
@@ -101,6 +105,10 @@ app.once('ready', () => {
             win.show();
         } else {
             win.showInactive();
+        }
+
+        if (shouldFullScreen(process.argv)) {
+            win.setFullScreen(true);
         }
     });
 

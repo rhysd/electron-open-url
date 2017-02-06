@@ -39,6 +39,11 @@ function parseArgv(argv) {
         argv.splice(always_on_top_idx, 1);
     }
 
+    const fullscreen_idx = argv.indexOf('--fullscreen');
+    if (fullscreen_idx >= 0) {
+        argv.splice(fullscreen_idx, 1);
+    }
+
     const width = parseIntArg('width', argv);
     const height = parseIntArg('height', argv);
 
@@ -53,6 +58,7 @@ function parseArgv(argv) {
         fallback: fallback_idx >= 0,
         focus: without_focus_idx < 0,
         alwaysOnTop: always_on_top_idx >= 0,
+        fullscreen: fullscreen_idx >= 0,
         width,
         height,
     };
@@ -85,6 +91,9 @@ Options:
 
     --always-on-top
         Show a window always on top of desktop.
+
+    --fullscreen
+        Show a window in fullscreen mode.
 
     --help
         Show this help.
