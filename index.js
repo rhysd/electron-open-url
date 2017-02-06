@@ -46,6 +46,9 @@ function open(parsed) {
     if (parsed.fullscreen) {
         args.push('--fullscreen');
     }
+    if (parsed.disableMenu) {
+        args.push('--disable-menu');
+    }
 
     child_process.spawn(electron, args, {
         stdio: 'ignore',
