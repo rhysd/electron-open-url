@@ -44,6 +44,11 @@ function parseArgv(argv) {
         argv.splice(fullscreen_idx, 1);
     }
 
+    const disable_menu_idx = argv.indexOf('--disable-menu');
+    if (disable_menu_idx >= 0) {
+        argv.splice(disable_menu_idx, 1);
+    }
+
     const width = parseIntArg('width', argv);
     const height = parseIntArg('height', argv);
 
@@ -59,6 +64,7 @@ function parseArgv(argv) {
         focus: without_focus_idx < 0,
         alwaysOnTop: always_on_top_idx >= 0,
         fullscreen: fullscreen_idx >= 0,
+        disableMenu: disable_menu_idx >= 0,
         width,
         height,
     };
@@ -94,6 +100,9 @@ Options:
 
     --fullscreen
         Show a window in fullscreen mode.
+
+    --disable-menu
+        Disable the window menu.
 
     --help
         Show this help.

@@ -53,6 +53,10 @@ function shouldFullScreen(argv) {
     return argv.indexOf('--fullscreen') >= 0;
 }
 
+function disableMenu(argv) {
+    return argv.indexOf('--disable-menu') >= 0;
+}
+
 const shouldQuit = app.makeSingleInstance((argv, workdir) => {
     if (win !== null) {
         if (win.isMinimized(0)) {
@@ -109,6 +113,10 @@ app.once('ready', () => {
 
         if (shouldFullScreen(process.argv)) {
             win.setFullScreen(true);
+        }
+
+        if (disableMenu(process.argv)) {
+            win.setMenu(null);
         }
     });
 
