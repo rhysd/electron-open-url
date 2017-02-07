@@ -1,6 +1,6 @@
 {
   "name": "electron-open-url",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "open something with Electron window",
   "main": "index.js",
   "bin": {
