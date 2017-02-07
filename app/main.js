@@ -3,7 +3,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const fs = require('fs');
 
-win = null;
+let win = null;
 
 function getUrlToOpen(argv) {
     const url = argv[2];
@@ -57,7 +57,7 @@ function disableMenu(argv) {
     return argv.indexOf('--disable-menu') >= 0;
 }
 
-const shouldQuit = app.makeSingleInstance((argv, workdir) => {
+const shouldQuit = app.makeSingleInstance((argv) => {
     if (win !== null) {
         if (win.isMinimized(0)) {
             win.restore();
