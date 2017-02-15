@@ -38,13 +38,16 @@ function open(p) {
 
     try {
         const electron = require('electron');
-        cp.spawn(electron, args, {
+        const p = cp.spawn(electron, args, {
             stdio: 'ignore',
             detached: true
-        }).unref();
+        });
+        p.unref();
+        return p;
     } catch (e) {
         if (parsed.fallback) {
             openFallback(parsed.target);
+            return null;
         } else {
             throw new Error('Electron binary was not found. Please ensure to install "electron" package in your machine.');
         }
